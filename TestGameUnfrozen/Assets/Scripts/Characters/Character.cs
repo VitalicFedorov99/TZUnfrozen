@@ -6,7 +6,7 @@ namespace TZUnfrozen.Characters
     public class Character : MonoBehaviour
     {
         [SerializeField] private float _health;
-        [SerializeField] private float _damage;
+        [SerializeField] private float _attackPower;
         [SerializeField] private StateCharacters _stateCharacters;
 
 
@@ -51,7 +51,26 @@ namespace TZUnfrozen.Characters
         public void Attack()
         {
             _stateCharacters = StateCharacters.Attack;
-            
+        }
+
+        public float GetAttackPower() 
+        {
+            return _attackPower;
+        }
+
+        public void  SetDamage(float damage) 
+        {
+            _health = _health - damage;
+            if (_health <= 0) 
+            {
+                Death();
+            }
+        }
+        
+        public void Death() 
+        {
+            Debug.Log("Умер");
+            ActionObserver.Instance.DeleteCharacter(this);
         }
     }
 }

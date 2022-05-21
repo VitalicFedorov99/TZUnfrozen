@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PickaxeCharge
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: c190898011349894fbc135bb072f908c, type: 2}
-  animationName: PickaxeCharge
+  animationName: DoubleShift

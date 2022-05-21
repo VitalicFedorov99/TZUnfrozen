@@ -15,33 +15,44 @@ namespace TZUnfrozen.GlobalGame
         }
         private void OnMouseDown()
         {
-            if (ActionObserver.Instance.GetActiveCharacter() != _character &&
-                ActionObserver.Instance.GetActiveCharacter().GetStateCharacters() == StateCharacters.Attack)
+            if (ActionObserver.Instance.GetActiveCharacter() != null)
             {
-                if (ActionObserver.Instance.GetActiveCharacter().GetFlagIsEnemy() != _character.GetFlagIsEnemy())
+                if (ActionObserver.Instance.GetActiveCharacter() != _character &&
+                    ActionObserver.Instance.GetActiveCharacter().GetStateCharacters() == StateCharacters.Attack)
                 {
-                    ActionObserver.Instance.AddTarget(_character);
+                    if (ActionObserver.Instance.GetActiveCharacter().GetFlagIsEnemy() != _character.GetFlagIsEnemy())
+                    {
+                        ActionObserver.Instance.AddTarget(_character);
+                        _backLight.OffLight();
+                    }
                 }
             }
         }
         private void OnMouseEnter()
         {
-            if (ActionObserver.Instance.GetActiveCharacter() != _character &&
-                ActionObserver.Instance.GetActiveCharacter().GetStateCharacters()==StateCharacters.Attack)
+            if (ActionObserver.Instance.GetActiveCharacter() != null)
             {
-                if (ActionObserver.Instance.GetActiveCharacter().GetFlagIsEnemy() != _character.GetFlagIsEnemy())
+                if (ActionObserver.Instance.GetActiveCharacter() != _character &&
+                ActionObserver.Instance.GetActiveCharacter().GetStateCharacters() == StateCharacters.Attack)
                 {
-                    _backLight.OnLight(Color.red);
-                }
-                else
-                {
-                    _backLight.OnLight(Color.yellow);
+                    if (ActionObserver.Instance.GetActiveCharacter().GetFlagIsEnemy() != _character.GetFlagIsEnemy())
+                    {
+                        _backLight.OnLight(Color.red);
+                    }
+                    else
+                    {
+                        _backLight.OnLight(Color.yellow);
+                    }
                 }
             }
         }
         private void OnMouseExit()
         {
-            _backLight.OffLight();
+            if (ActionObserver.Instance.GetActiveCharacter() != null)
+            {
+                if (ActionObserver.Instance.GetActiveCharacter() != _character)
+                    _backLight.OffLight();
+            }
         }
     }
 }

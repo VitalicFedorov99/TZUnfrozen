@@ -19,6 +19,8 @@ namespace TZUnfrozen.GlobalGame
             //CreateListActionCharacters();
         }
 
+       
+
         public void SetupListCharacterPlayer(List<Character> character) 
         {
             _liveCharactersPlayer = character;
@@ -61,6 +63,22 @@ namespace TZUnfrozen.GlobalGame
             {
                 CreateListActionCharacters();
             }
+        }
+
+        public void RemoveCharacter(Character character, bool flag) 
+        {
+            if (flag == false) 
+            {
+                _liveCharactersPlayer.Remove(character);
+                _actionCharacters.Remove(character);
+                
+            }
+            else 
+            {
+                _liveCharactersEnemy.Remove(character);
+                _actionCharacters.Remove(character);
+            }
+            Destroy(character.gameObject,2f);
         }
 
     }
