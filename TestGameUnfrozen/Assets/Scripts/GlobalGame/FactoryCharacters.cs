@@ -3,34 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using TZUnfrozen.Characters;
 using Spine.Unity;
-public class FactoryCharacters : MonoBehaviour
+
+namespace TZUnfrozen.GlobalGame
 {
-    [SerializeField] private Character _character;
-
-    public List<Character> CreateCharacters(List<Character> characters, int count,bool flagElite) 
+    public class FactoryCharacters : MonoBehaviour
     {
-        CheckElite(flagElite);
-        characters=new List<Character>();
-        for (int i = 0; i < count; i++)
+        [SerializeField] private Character _character;
+
+        public List<Character> CreateCharacters(List<Character> characters, int count, bool flagElite)
         {
-            Character character = Instantiate(_character);
-            character.name += i;
-            characters.Add(character);
+            CheckElite(flagElite);
+            characters = new List<Character>();
+            for (int i = 0; i < count; i++)
+            {
+                Character character = Instantiate(_character);
+                character.name += i;
+                characters.Add(character);
+            }
+            return characters;
         }
-        return characters;
-    }
 
 
-    public void CheckElite(bool flagElite) 
-    {
-        if (flagElite == true)
+        public void CheckElite(bool flagElite)
         {
-            _character.GetComponent<SkeletonAnimation>().initialSkinName = "elite";
+            if (flagElite == true)
+            {
+                _character.GetComponent<SkeletonAnimation>().initialSkinName = "elite";
+            }
+            else
+            {
+                _character.GetComponent<SkeletonAnimation>().initialSkinName = "base";
+            }
         }
-        else
-        {
-            _character.GetComponent<SkeletonAnimation>().initialSkinName = "base";
-        }
+
     }
-    
 }

@@ -204,6 +204,8 @@ MonoBehaviour:
   idle: {fileID: 11400000, guid: 51e499af09d22b143a142deee1998c7b, type: 2}
   attack: {fileID: 11400000, guid: 374db378bb22bc44d818a10615ec887f, type: 2}
   damage: {fileID: 11400000, guid: 69df841c27cf06246ad5ccec1b14afed, type: 2}
+  skip: {fileID: 11400000, guid: c181e24681db3f24fb19e5ceb4179aa9, type: 2}
+  eventName: Hit
   currentState: 
 --- !u!1 &4745951403803042961
 GameObject:
@@ -245,7 +247,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4745951403803042961}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 0.05
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0

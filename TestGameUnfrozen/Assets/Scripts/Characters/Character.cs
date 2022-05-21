@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TZUnfrozen.GlobalGame;
 namespace TZUnfrozen.Characters
 {
     public class Character : MonoBehaviour
@@ -44,9 +43,16 @@ namespace TZUnfrozen.Characters
 
         public void SkipStep() 
         {
-             SetIsActiv(false);
-             backLight.OffLight();
+            Skip();
+             ActionObserver.Instance.ActionSkipStep();
         }
+
+        public void Skip() 
+        {
+            SetIsActiv(false);
+            backLight.OffLight();
+        }
+       
 
         public void Attack()
         {

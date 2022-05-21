@@ -1,70 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TZUnfrozen.Characters;
-using TZUnfrozen.GlobalGame;
 
-public class ActionObserver : MonoBehaviour
+namespace TZUnfrozen.GlobalGame
 {
-
-    public static ActionObserver Instance { get; private set; }
-
-    [SerializeField] private QueueStepCharacters _queue;
-
-    [SerializeField] private Character _activeCharacter;
-
-    [SerializeField] private UIManager _uIManager;
-
-    [SerializeField] private ActionCharacter _actionCharacter;
-
-    public void SetActivCharacter(Character character) 
+    public class ActionObserver : MonoBehaviour
     {
-        Debug.Log("Name");
-        _activeCharacter = character;
-        _uIManager.AddActionSkipButton(character);
-        _uIManager.AddActionAttackButton(character);
-    }
 
-    public Character GetActiveCharacter() 
-    {
-        return _activeCharacter;
-    }
+        public static ActionObserver Instance { get; private set; }
 
-    public void AddTarget(Character character) 
-    {
-        _actionCharacter.ClearListTarget();
-        _actionCharacter.AddTartget(character);
-        _activeCharacter.SkipStep();
-        //_activeCharacter = null;
-        StartCoroutine(NextCharacter());
-    }
+        [SerializeField] private QueueStepCharacters _queue;
 
-    public void DeleteCharacter(Character character) 
-    {
-        _queue.RemoveCharacter(character, character.GetFlagIsEnemy());
-    }
+        [SerializeField] private Character _activeCharacter;
 
-    IEnumerator NextCharacter()
-    {
-        yield return new WaitForSeconds(3f);
-        _queue.RandomChoiceCharacter();
-    }
+        [SerializeField] private UIManager _uIManager;
 
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
+        [SerializeField] private ActionCharacter _actionCharacter;
 
-        if (Instance != null && Instance != this)
+        public void SetActivCharacter(Character character)
         {
-            Destroy(this);
+            _activeCharacter = character;
+            _uIManager.AddActionSkipButton(character);
+            _uIManager.AddActionAttackButton(character);
         }
-        else
+
+        public Character GetActiveCharacter()
         {
-            Instance = this;
+            return _activeCharacter;
+        }
+
+        public void AddTarget(Character character)
+        {
+            _actionCharacter.ClearListTarget();
+            _actionCharacter.AddTarget(character);
+            _activeCharacter.Skip();
+        }
+
+        public void DeleteCharacter(Character character)
+        {
+            _queue.RemoveCharacter(character, character.GetFlagIsEnemy());
+        }
+
+
+        public void ActionSkipStep()
+        {
+            _actionCharacter.Skip();
+        }
+        public void UseNextCharacter()
+        {
+            _queue.RandomChoiceCharacter();
+        }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
         }
     }
-
-
-
-    
 }

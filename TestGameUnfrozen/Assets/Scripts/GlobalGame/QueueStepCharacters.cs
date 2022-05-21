@@ -11,14 +11,6 @@ namespace TZUnfrozen.GlobalGame
         [SerializeField] private List<Character> _actionCharacters;
         
         private ActionObserver _actionObserver;
-
-
-        private void Start()
-        {
-            //_actionCharacters = new List<Character>();
-            //CreateListActionCharacters();
-        }
-
        
 
         public void SetupListCharacterPlayer(List<Character> character) 
@@ -56,7 +48,6 @@ namespace TZUnfrozen.GlobalGame
                 Character character = _actionCharacters[rand];
                 _actionCharacters[rand].SetIsActiv(true);
                 _actionCharacters.RemoveAt(rand);
-                Debug.Log(character.name);
                 _actionObserver.SetActivCharacter(character);
             }
             else if(_actionCharacters.Count == 0) 
@@ -78,7 +69,7 @@ namespace TZUnfrozen.GlobalGame
                 _liveCharactersEnemy.Remove(character);
                 _actionCharacters.Remove(character);
             }
-            Destroy(character.gameObject,2f);
+            Destroy(character.gameObject,1f);
         }
 
     }

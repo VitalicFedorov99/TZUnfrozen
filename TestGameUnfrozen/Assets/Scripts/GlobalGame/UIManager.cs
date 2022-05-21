@@ -4,22 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using TZUnfrozen.Characters;
 using TZUnfrozen.GlobalGame;
-public class UIManager : MonoBehaviour
+namespace TZUnfrozen.GlobalGame
 {
-    [SerializeField] private Button _skipButton;
-    [SerializeField] private Button _attackButton;
-    [SerializeField] private QueueStepCharacters _queue;
-
-    public void AddActionSkipButton(Character character) 
+    public class UIManager : MonoBehaviour
     {
-        _skipButton.onClick.RemoveAllListeners();
-        _skipButton.onClick.AddListener(character.SkipStep);
-        _skipButton.onClick.AddListener(_queue.RandomChoiceCharacter);
-    }
+        [SerializeField] private Button _skipButton;
+        [SerializeField] private Button _attackButton;
+        [SerializeField] private QueueStepCharacters _queue;
 
-    public void AddActionAttackButton(Character character) 
-    {
-        _attackButton.onClick.RemoveAllListeners();
-        _attackButton.onClick.AddListener(character.Attack);
+        public void AddActionSkipButton(Character character)
+        {
+            _skipButton.onClick.RemoveAllListeners();
+            _skipButton.onClick.AddListener(character.SkipStep);
+        }
+
+        public void AddActionAttackButton(Character character)
+        {
+            _attackButton.onClick.RemoveAllListeners();
+            _attackButton.onClick.AddListener(character.Attack);
+        }
     }
 }
